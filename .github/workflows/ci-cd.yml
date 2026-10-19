@@ -1,0 +1,32 @@
+
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Verify application
+        run: |
+          test -f index.html
+          echo "Application file verified successfully"
+
+      - name: Build application
+        run: |
+          mkdir -p dist
+          cp index.html dist/index.html
+          echo "Build completed successfully"
+
+      - name: Deploy application
+        run: |
+          test -f dist/index.html
+          echo "Deployment simulation completed successfully"
